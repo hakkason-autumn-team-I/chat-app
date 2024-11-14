@@ -1,10 +1,9 @@
-
 from flask import abort
 from util.DB import DB
 import datetime
 
-
 class dbconnect:
+
     #ユーザー作成
     def create_user(uid,name,email,password):
         try:
@@ -18,6 +17,7 @@ class dbconnect:
             abort(500)
         finally:
             cur.close()
+
     #ユーザー取得
     def get_user(email):
         try:
@@ -32,18 +32,16 @@ class dbconnect:
         finally:
             cur.close()
 
-
     #チャンネルを追加
-    def create_channel(id,chnnel_name,event_date,url,image_place,uid):
+    def create_channel(id,channel_name,event_date,url,image_place,uid):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
             sql = "INSERT INTO channels (id,channel_name,event_date,url,image_place,uid) VALUES (%s, %s, %s, %s, %s, %s);"
-            cur.execute(sql,(id,chnnel_name,event_date,url,image_place,uid))
-            print("追加完了")
+            cur.execute(sql,(id,channel_name,event_date,url,image_place,uid))
             conn.commit()
         except Exception as e:
-            print(f'エラーが発生 createChannel:{e}')
+            print(f'エラーが発生:{e}')
             abort(500)
         finally:
             cur.close()
@@ -51,16 +49,14 @@ class dbconnect:
     #チャンネルメンバー追加
     def add_channelmembers(uid_list,cid):
         try:
-
             conn = DB.getConnection()
             cur = conn.cursor()
             for uid in uid_list:
                 sql = "INSERT INTO channelmembers (uid,cid) VALUES (%s,%s);"
                 cur.execute(sql,(uid,cid))
-            print("追加完了")
             conn.commit()
         except Exception as e:
-            print(f'エラーが発生 createChannel:{e}')
+            print(f'エラーが発生:{e}')
             abort(500)
         finally:
             cur.close()
@@ -85,12 +81,10 @@ class dbconnect:
             cur = conn.cursor()
             sql = "SELECT * FROM  channels as ch INNER JOIN channelmembers as ch_member on ch.id = ch_member.cid WHERE ch_member.uid= %s and ch.event_date > %s ORDER BY ch.event_date ASC ;"
             cur.execute(sql,(uid,datetime.datetime.now()))
-            #print(cur.fetchone())
-            user = cur.fetchall()
-           
+            user = cur.fetchall()          
             return user
         except Exception as e:
-            print(f'エラーが発生してますGET:{e}')
+            print(f'エラーが発生:{e}')
             abort(500)
         finally:
             cur.close()
@@ -102,19 +96,14 @@ class dbconnect:
             cur = conn.cursor()
             sql = "SELECT * FROM  channels as ch INNER JOIN channelmembers as ch_member on ch.id = ch_member.cid WHERE ch_member.uid= %s and ch.event_date < %s ORDER BY ch.event_date ASC ;"
             cur.execute(sql,(uid,datetime.datetime.now()))
-            #print(cur.fetchone())
-            user = cur.fetchall()
-           
+            user = cur.fetchall()          
             return user
         except Exception as e:
-            print(f'エラーが発生してますGET:{e}')
+            print(f'エラーが発生:{e}')
             abort(500)
         finally:
             cur.close()
     
-
-
-
     #チェンネル編集する際にチャンネル情報を取得
     def get_channel(cid):
         try:
@@ -122,12 +111,10 @@ class dbconnect:
             cur = conn.cursor()
             sql = "SELECT * FROM  channels where id=%s;"
             cur.execute(sql,(cid))
-            #print(cur.fetchone())
-            Ch = cur.fetchone()
-            
+            Ch = cur.fetchone()         
             return Ch
         except Exception as e:
-            print(f'エラーが発生してますGET:{e}')
+            print(f'エラーが発生:{e}')
             abort(500)
         finally:
             cur.close()
@@ -139,11 +126,9 @@ class dbconnect:
             cur = conn.cursor()
             sql = "UPDATE channels set channel_name = %s,event_date = %s,url = %s,image_place = %s Where id =  %s and uid = %s;"
             cur.execute(sql,(channel_name,event_date,url,image_place,cid,uid))
-            print("変更完了")
-            conn.commit()
-            
+            conn.commit()           
         except Exception as e:
-            print(f"エラーが発生してます:{e}")
+            print(f"エラーが発生:{e}")
         finally:
             cur.close()
 
@@ -157,7 +142,7 @@ class dbconnect:
             message = cur.fetchall()
             return message
         except Exception as e:
-               print(f"エラーが発生してます:{e}")
+               print(f"エラエラーが発生ーが発生してます:{e}")
         finally:
             cur.close()
 
@@ -168,10 +153,9 @@ class dbconnect:
             cur = conn.cursor()
             sql = "INSERT INTO messages (message,posted_at,uid,cid) VALUES (%s, %s, %s, %s);"
             cur.execute(sql,(message,posted_at,uid,cid))
-            print("追加完了")
             conn.commit()
         except Exception as e:
-            print(f'エラーが発生 createChannel:{e}')
+            print(f'エラーが発生:{e}')
             abort(500)
         finally:
             cur.close()
