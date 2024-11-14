@@ -142,7 +142,7 @@ class dbconnect:
             message = cur.fetchall()
             return message
         except Exception as e:
-               print(f"エラエラーが発生ーが発生してます:{e}")
+               print(f"エラーが発生:{e}")
         finally:
             cur.close()
 
