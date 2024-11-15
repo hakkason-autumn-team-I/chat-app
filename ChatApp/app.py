@@ -2,6 +2,10 @@ from flask import Flask,request,redirect,render_template
 
 app = Flask(__name__)
 
+@app.route('/test')
+def test():
+     return render_template('registration/signup.html')
+
 @app.route('/')
 def Hello():
      return render_template('index.html')
