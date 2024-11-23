@@ -11,6 +11,7 @@ app = Flask(__name__)
 #app.config['SECRET_KEY']ともかける。appの属性を設定するこの書き方でもオブジェクトに値が送られるので、以下のように書いても良い。
 app.secret_key = uuid.uuid4().hex
 app.permanent_session_lifetime = timedelta(days = 25)
+salt = os.urandom(32)
 
 #サインアップ画面表示
 @app.route('/signup', methods = ["GET"])
@@ -52,7 +53,6 @@ def signup_user():
      else:
           uid = uuid.uuid4()
           original_password = password1
-          salt = os.urandom(32)
           password = hashlib.sha256(salt + original_password.encode()).hexdigest()
           DB_user = dbconnect.get_user(email)
           if DB_user != None:
@@ -63,6 +63,43 @@ def signup_user():
                flash("登録ありがとうございます！")
                return redirect("/")
      return redirect('/signup')
+
+#ログインページ表示
+@app.route('/login',methods = ["GET"])
+def login():
+     return render_template("registration/login.html")
+
+#ログイン処理
+@app.route('/login',methods = ["POST"])
+def login_user():
+     email = request.form.get("email")
+     password = request.form.get("password")
+     hashed_pass = hashlib.sha256(salt + password.encode()).hexdigest()
+     print(hashed_pass)
+     if email == "" or password == "":
+          flash("空のフォームがあります。")
+     else:
+          DB_user = dbconnect.get_user(email)
+          if DB_user is None:
+              flash("登録されていないようです。登録をお願いします。")
+              return redirect("/login")
+          else:
+              db_password = DB_user['password']
+              print(DB_user)
+              if hashed_pass == db_password:
+                  uid = DB_user['id']
+                  session['uid']= str(uid)
+                  return redirect("/")
+              else:
+                  flash("パスワードがちがいます。")
+                  return redirect('/login')
+     return redirect('/login')
+
+#ログアウト処理
+@app.route('/logout')
+def logout():
+     session.clear()
+     return redirect('/login')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=False)
