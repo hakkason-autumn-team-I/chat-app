@@ -11,9 +11,13 @@ app = Flask(__name__)
 
 @app.route('/create-channel',methods=['GET','POST'])
 def create_channel():
+     #ユーザーのid取得
      uid = session.get("uid")
+     if uid is None:
+          return redirect('/login')
+
      if request.method == 'POST':
-          #チェンネルのidを生成
+          #チャンネルのidを生成
           cid = uuid.uuid4()
 
           #htmlで入力された情報を取得
