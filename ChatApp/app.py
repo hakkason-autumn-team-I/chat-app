@@ -11,7 +11,10 @@ app = Flask(__name__)
 
 @app.route("/edit-channel/<cid>",methods=["GET","POST"])
 def update_channel(cid):
-
+     #ユーザーのid取得
+     uid = session.get("uid")
+     if uid is None:
+               return redirect('/login')
      if request.method=="GET":
           #チャンネル情報を取得
           channels= dbconnect.get_channel(cid)
@@ -25,7 +28,6 @@ def update_channel(cid):
           channel_name = request.form.get('channnel_Name')
           event_date = request.form.get('event_date')         
           url = request.form.get('url')
-          uid = session.get("uid")
           uids = request.form.getlist('uids')
 
           #htmlで入力された情報を取得
