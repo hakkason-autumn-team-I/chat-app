@@ -1,4 +1,3 @@
-from flask import Flask,request,redirect,render_template
 from flask import Flask,request,redirect,render_template,flash,session
 import uuid
 from datetime import timedelta
@@ -6,14 +5,16 @@ from models import dbconnect
 import re
 import hashlib
 import os
+import datetime
 
 app = Flask(__name__)
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/')
 def get_all_channels():
      #ユーザーのid取得
      uid = session.get("uid")
-
+     if uid is None:
+          return redirect('/login')
      #チャンネル情報取得
      channels = dbconnect.get_all_channels(uid)
 
