@@ -153,7 +153,7 @@ def update_channel(cid):
           channels= dbconnect.get_channel(cid)
      	#ログインしているユーザー以外のユーザーを取得
           uids = dbconnect.all_get_other_user(uid)
-          return render_template('edit_channel.html',channels=channels,uids=uids)
+          return render_template('edit-channel.html',channels=channels,uids=uids)
      
      if request.method=="POST":
           #画像保存
