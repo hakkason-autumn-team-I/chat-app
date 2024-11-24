@@ -17,7 +17,6 @@ def get_all_channels():
           return redirect('/login')
      #チャンネル情報取得
      channels = dbconnect.get_all_channels(uid)
-
      return render_template('index.html',channels=channels)
 
 if __name__ == '__main__':
