@@ -2,6 +2,10 @@ from flask import Flask,request,redirect,render_template,flash,session
 import uuid
 from datetime import timedelta
 from models import dbconnect
+<<<<<<< HEAD
+=======
+import datetime
+>>>>>>> origin/feature/takanori/edit_channel
 import re
 import hashlib
 import os
@@ -13,6 +17,7 @@ app.secret_key = uuid.uuid4().hex
 app.permanent_session_lifetime = timedelta(days = 25)
 salt = os.urandom(32)
 
+<<<<<<< HEAD
 #サインアップ画面表示
 @app.route('/signup', methods = ["GET"])
 def signup():
@@ -100,6 +105,42 @@ def login_user():
 def logout():
      session.clear()
      return redirect('/login')
+=======
+@app.route("/edit-channel/<cid>",methods=["GET","POST"])
+def update_channel(cid):
+     #ユーザーのid取得
+     uid = session.get("uid")
+     if uid is None:
+               return redirect('/login')
+     if request.method=="GET":
+          #チャンネル情報を取得
+          channels= dbconnect.get_channel(cid)
+     	#ログインしているユーザー以外のユーザーを取得
+          uids = dbconnect.all_get_other_user(uid)
+
+          return render_template('edit_channel.html',channels=channels,uids=uids)
+     
+     if request.method=="POST":
+          #画像保存
+          channel_name = request.form.get('channnel_Name')
+          event_date = request.form.get('event_date')         
+          url = request.form.get('url')
+          uids = request.form.getlist('uids')
+
+          #htmlで入力された情報を取得
+          image = request.files['Event_Image']
+          image_id = uuid.uuid4()
+          image_place = os.path.join("static/user-img",str(image_id)) + ".jpg"
+          image.save(image_place) 
+          
+          #チャンネル情報更新
+          dbconnect.edit_channel(cid,channel_name,event_date,url,image_place,uid)
+          dbconnect.delete_channelmembers(cid)
+          dbconnect.add_channelmembers(uids,cid)
+
+          return redirect('/')
+>>>>>>> origin/feature/takanori/edit_channel
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=False)
+    app.run(host='0.0.0.0',debug=True)
+
