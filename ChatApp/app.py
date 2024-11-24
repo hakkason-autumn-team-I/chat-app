@@ -5,6 +5,7 @@ from models import dbconnect
 import re
 import hashlib
 import os
+import datetime
 
 app = Flask(__name__)
 #セッション情報の暗号化にsecret_keyが必要で、今回はuuidを16進数化することを利用して、ランダムなstrかbytes列を作る。
@@ -101,7 +102,16 @@ def logout():
      session.clear()
      return redirect('/login')
     
- 
+@app.route('/')
+def get_all_channels():
+     #ユーザーのid取得
+     uid = session.get("uid")
+     if uid is None:
+          return redirect('/login')
+     #チャンネル情報取得
+     channels = dbconnect.get_all_channels(uid)
+     return render_template('index.html',channels=channels)
+  
 @app.route('/create-channel',methods=['GET','POST'])
 def create_channel():
      #ユーザーのid取得
@@ -114,13 +124,13 @@ def create_channel():
           cid = uuid.uuid4()
 
           #htmlで入力された情報を取得
-          channel_name = request.form.get('channnel_Name')
+          channel_name = request.form.get('channel_Name')
           event_date = request.form.get('event_date')         
           url = request.form.get('url')         
           uids = request.form.getlist('uids')
 
           #画像保存
-          image = request.files['Event_Image']
+          image = request.files['image_place']
           image_id = uuid.uuid4()
           image_place = os.path.join("static/user-img",str(image_id)) + ".jpg"
           image.save(image_place)
@@ -128,12 +138,10 @@ def create_channel():
           #チャンネル情報追加
           dbconnect.create_channel(cid,channel_name,event_date,url,image_place,uid)
           dbconnect.add_channelmembers(uids,cid)
-
           return redirect('/')
      
      #ログインしているユーザー以外のユーザーを取得
      uids = dbconnect.all_get_other_user(uid)
-
      return render_template('create-channel.html',uids=uids)
 
 if __name__ == '__main__':
