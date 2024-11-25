@@ -77,12 +77,12 @@ class dbconnect:
             cur.close()
 
     #チャンネルメンバー取得
-    def get_channelmembers(cid):
+    def get_channelmembers(cid,uid):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT * FROM channelmembers WHERE not cid = %s;"
-            cur.execute(sql,(cid))
+            sql = "SELECT * FROM channelmembers WHERE  cid = %s AND uid = %s;"
+            cur.execute(sql,(cid,uid))
             check_uids = cur.fetchall()
             return check_uids
         except Exception as e:
