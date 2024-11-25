@@ -76,7 +76,7 @@ class dbconnect:
         finally:
             cur.close()
 
-    #チャンネルメンバーの取得
+    #チャンネルメンバー取得
     def get_channelmembers(cid):
         try:
             conn = DB.getConnection()
