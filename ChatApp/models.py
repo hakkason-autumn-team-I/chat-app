@@ -76,6 +76,21 @@ class dbconnect:
         finally:
             cur.close()
 
+    #チャンネルメンバーの取得
+    def get_channelmembers(cid):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM channelmembers WHERE not cid = %s;"
+            cur.execute(sql,(cid))
+            check_uids = cur.fetchall()
+            return check_uids
+        except Exception as e:
+            print(f'エラーが発生:{e}')
+            abort(500)
+        finally:
+            cur.close()
+
     #チャンネルメンバー削除
     def delete_channelmembers(cid):
         try:
@@ -157,7 +172,7 @@ class dbconnect:
             cur.execute(sql,(channel_name,event_date,url,image_place,cid))
             conn.commit()           
         except Exception as e:
-            print(f'ーが発生:{e}')
+            print(f'エラーが発生:{e}')
         finally:
             cur.close()
 
