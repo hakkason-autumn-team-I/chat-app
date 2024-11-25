@@ -174,9 +174,6 @@ def update_channel(cid):
           dbconnect.delete_channelmembers(cid)
           dbconnect.add_channelmembers(uids,cid)
           return redirect('/')
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True)
         
 #アルバム一覧画面
 @app.route('/album/<cid>',methods = ["GET"])
@@ -215,6 +212,33 @@ def create_image(cid):
           albums = dbconnect.get_all_albums(cid)
           return render_template('album.html',albums=albums,cid=cid)     
      return render_template('create-image.html')
+  
+#メッセージ表示
+@app.route('/detail/<cid>')  
+def detail(cid):
+     uid = session.get("uid")
+     if uid is None:
+          return redirect('/login')
+     else:
+          cid = cid
+          channel = dbconnect.get_channel(cid)
+          messages = dbconnect.get_all_messages(cid)
+          return render_template('detail.html', messages=messages,channel=channel, uid=uid)
+
+#メッセージ投稿
+@app.route('/message', methods=['POST'])
+def message():
+     uid = session.get("uid")
+     if uid is None:
+          return redirect('/login')
+                 
+     message = request.form.get('message')
+     posted_at = datetime.datetime.now()
+     print(posted_at)
+     cid = request.form.get('cid')
+
+     dbconnect.add_message(message,posted_at,uid,cid)
+     return redirect('/detail/{cid}'.format(cid = cid))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True)
