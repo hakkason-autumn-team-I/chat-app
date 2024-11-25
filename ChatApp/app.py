@@ -11,7 +11,7 @@ import datetime
 app = Flask(__name__)
      
 #アルバム一覧画面
-@app.route('/album/<cid>',methods = ["GET","POST"])
+@app.route('/album/<cid>',methods = ["GET"])
 def album(cid):
      #ユーザーのid取得
      uid = session.get("uid")
