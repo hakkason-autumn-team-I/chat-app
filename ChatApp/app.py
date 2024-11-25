@@ -140,7 +140,6 @@ def create_channel():
           dbconnect.create_channel(cid,channel_name,event_date,url,image_place,uid)
           dbconnect.add_channelmembers(uids,cid)
           return redirect('/')
-
         
 @app.route("/edit-channel/<cid>",methods=["GET","POST"])
 def update_channel(cid):
@@ -151,11 +150,12 @@ def update_channel(cid):
      if request.method=="GET":
           #チャンネル情報を取得
           channels= dbconnect.get_channel(cid)
-     	#ログインしているユーザー以外のユーザーを取得
+     	    #ログインしているユーザー以外のユーザーを取得
           uids = dbconnect.all_get_other_user(uid)
           #共有しているユーザー一覧を取得
           checked_uids = dbconnect.get_channelmembers(cid,uid)
           return render_template('edit_channel.html',channels=channels,uids=uids,checked_uids=checked_uids)
+
      
      if request.method=="POST":
           #画像保存
