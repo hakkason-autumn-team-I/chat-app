@@ -18,6 +18,7 @@ header button{
   background-color: #a8e6ff;
   border-radius: 25px;
   font-size: 14px;
+  font-family: "Potta One", system-ui;
 }
 
 .container{
@@ -68,4 +69,5 @@ form button {
   width: 50%;
   background-color: #a8e6ff;
   border-radius: 25px;
+  font-family: "Potta One", system-ui;
 }
