@@ -1,0 +1,71 @@
+/* 全体のスタイル */
+body {
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: #000000;
+  justify-content: center;
+  height: 100vh;
+}
+
+header{
+  margin: 0 auto;
+  width: 412px;
+  background-color: #FFEAF4;
+}
+
+header button{
+  width: 20%;
+  background-color: #a8e6ff;
+  border-radius: 25px;
+  font-size: 14px;
+}
+
+.container{
+  margin: 0 auto;
+  width: 412px;
+  height: 890px;
+  background-color: #FFEAF4;
+}
+
+.main{
+  width: 412px;
+  height: 917px;
+}
+
+form {
+  width: 70%;
+  text-align: center;
+  background-color: #FFF7EF;
+  margin: auto;
+  padding: 30px 20px;
+  border: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+
+form label {
+  display: block;
+  width: auto;
+  font-size: 14px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+form input {
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ffd1dc;
+  border-radius: 12px;
+  font-size: 14px;
+  overflow: scroll;
+}
+
+.scroll{
+  overflow: scroll;
+  height: 20vh;
+}
+
+form button {
+  width: 50%;
+  background-color: #a8e6ff;
+  border-radius: 25px;
+}

@@ -32,6 +32,21 @@ class dbconnect:
         finally:
             cur.close()
 
+    #ユーザー取得
+    def all_get_other_user(uid):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM users WHERE not id = %s;"
+            cur.execute(sql,(uid))
+            users = cur.fetchall()
+            return users
+        except Exception as e:
+            print(f'エラーが発生:{e}')
+        finally:
+            cur.close()
+
+
     #チャンネルを追加
     def create_channel(id,channel_name,event_date,url,image_place,uid):
         try:
@@ -52,8 +67,37 @@ class dbconnect:
             conn = DB.getConnection()
             cur = conn.cursor()
             for uid in uid_list:
-                sql = "INSERT INTO channelmembers (uid,cid) VALUES (%s,%s);"
+                sql = "INSERT INTO channelmembers (uid,cid,starred) VALUES (%s,%s,False);"
                 cur.execute(sql,(uid,cid))
+            conn.commit()
+        except Exception as e:
+            print(f'エラーが発生:{e}')
+            abort(500)
+        finally:
+            cur.close()
+
+    #チャンネルメンバー取得
+    def get_channelmembers(cid,uid):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM channelmembers WHERE  cid = %s AND uid = %s;"
+            cur.execute(sql,(cid,uid))
+            check_uids = cur.fetchall()
+            return check_uids
+        except Exception as e:
+            print(f'エラーが発生:{e}')
+            abort(500)
+        finally:
+            cur.close()
+
+    #チャンネルメンバー削除
+    def delete_channelmembers(cid):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "DELETE FROM channelmembers WHERE cid = %s;"
+            cur.execute(sql,(cid))
             conn.commit()
         except Exception as e:
             print(f'エラーが発生:{e}')
@@ -120,15 +164,15 @@ class dbconnect:
             cur.close()
     
     #チャンネル編集でチャンネル内容を変更
-    def edit_channel(cid,channel_name,event_date,url,image_place,uid):
+    def edit_channel(cid,channel_name,event_date,url,image_place):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "UPDATE channels set channel_name = %s,event_date = %s,url = %s,image_place = %s Where id =  %s and uid = %s;"
-            cur.execute(sql,(channel_name,event_date,url,image_place,cid,uid))
+            sql = "UPDATE channels set channel_name = %s,event_date = %s,url = %s,image_place = %s Where id =  %s;"
+            cur.execute(sql,(channel_name,event_date,url,image_place,cid))
             conn.commit()           
         except Exception as e:
-            print(f"エラーが発生:{e}")
+            print(f'エラーが発生:{e}')
         finally:
             cur.close()
 
@@ -142,7 +186,7 @@ class dbconnect:
             message = cur.fetchall()
             return message
         except Exception as e:
-               print(f"エラーが発生:{e}")
+            print(f"エラーが発生:{e}")
         finally:
             cur.close()
 
@@ -193,5 +237,3 @@ class dbconnect:
 
     
     
-
-

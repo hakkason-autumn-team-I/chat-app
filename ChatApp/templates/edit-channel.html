@@ -1,46 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>edit-channel</title>
+    <link rel="stylesheet" href="../static/css/channel.css">
+  </head>
 
-<title>create-channel</title>
-
-
-<div>
-  <button>
-    戻る
-  </button>
-</div>
+<body>
+  <header>
+    <div class="back">
+      <button>
+        <a href="/">戻る</a>
+      </button>
+    </div>
+  </header>
 
 <!--チャンネルを持ってくる方法を考える-->
-<div>
-  <form method="post">
-    <div>
-      <label>チャンネル名</label>
-      <input type="text" />
+  <main>
+    <div class="container">
+      <form method="post" action="edit_channel">
+        <div>
+          <label>チャンネル名</label>
+          <input type="text" name="channnel_Name" value="{{ channels.channel_name }}"/>
+        </div>
+
+        <div>
+          <label>URL</label>
+          <input type="url" name="url" value="{{ channels.url }}"/>
+        </div>
+
+        <div>
+          <label>日時</label>
+          <input type="date" name="event_date" value="{{ channels.event_date }}"/>
+        </div>
+
+        <div>
+          <label>画像</label>
+
+          <!--画像イメージを追加したい-->
+
+          <input type="file" name="image_place" value="{{ channels.image_place }}">
+        </div>
+
+        <div class="scroll">
+          {% for user in uids %}
+            {% for list in checked_uids %}
+              {% if user == list %}
+                <div>
+                  {{ user.user_name }}
+                  <input class="checkbox" type="checkbox" name="uid"  checked/>
+                </div>
+              {% else %}
+                <div>
+                  {{ user.user_name }}
+                  <input class="checkbox" type="checkbox" name="uid" />
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </div>
+          
+        <div>
+          <button type="submit">編集</button>
+        </div>
+      </form>
     </div>
-
-    <div>
-      <label>URL</label>
-      <input type="url" />
-    </div>
-
-    <div>
-      <label>日時</label>
-      <input type="date" />
-    </div>
-
-    <div>
-      <label>画像</label>
-
-      #画像イメージを追加したい
-
-      <input type="file">
-    </div>
-
-    <div>
-      <label>共有相手</label>
-      <input type="checkbox">
-    </div>
-
-    <div>
-      <button>編集</button>
-    </div>
-  </form>
-</div>
+  </main>
+</body>
+</html>
