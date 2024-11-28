@@ -14,22 +14,7 @@
       <button class="button back-button" onclick="location.href='/detail/{{cid}}'">戻る</button>
 
       <!-- 画像追加ボタン -->
-      <button class="button add-image-button" onclick="document.getElementById('image-upload').click()">画像追加</button>
-      <form 
-        id="image-form" 
-        action="{{ url_for('create_image', cid=cid) }}" 
-        method="POST" 
-        enctype="multipart/form-data" 
-        style="display: none;"
-      >
-        <input 
-          type="file" 
-          id="image-upload" 
-          name="image" 
-          accept="image/*" 
-          onchange="document.getElementById('image-form').submit();"
-        >
-      </form>
+      <button class="button add-image-button" onclick="location.href='/create-image/<cid>'">画像追加</button>
     </header>
 
     <!-- アルバムコンテンツ -->
@@ -37,12 +22,9 @@
       {% if albums %}
         {% for album in albums %}
         <div class="image-card">
-          <!-- デバッグ用に画像URLを確認したい場合 -->
-          <!-- <p>{{ url_for('static', filename=album.image_url) }}</p> -->
-          <img 
-            src="{{ url_for('static', filename=album.image_url) }}" 
-            alt="アルバム画像" 
-            onerror="this.onerror=null; this.src='/static/uploads/default.jpg';"
+          <img
+            src="{{ album.album_place }}"
+            alt="アルバム画像"
           >
         </div>
         {% endfor %}
@@ -50,6 +32,7 @@
         <p class="no-images">画像がまだ追加されていません。</p>
       {% endif %}
     </main>
+
   </div>
 </body>
 </html>
