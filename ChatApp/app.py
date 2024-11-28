@@ -137,7 +137,7 @@ def create_channel():
 
           #チャンネル情報追加
           dbconnect.create_channel(cid,channel_name,event_date,url,image_place,uid)
-          dbconnect.add_channelmembers(uids,cid)
+          dbconnect.add_channelmembers(uids,uid,cid)
           return redirect('/')
      #ログインしているユーザー以外のユーザーを取得
      uids = dbconnect.all_get_other_user(uid)
@@ -156,7 +156,7 @@ def update_channel(cid):
           uids = dbconnect.all_get_other_user(uid)
           #共有しているユーザー一覧を取得
           checked_uids = dbconnect.get_channelmembers(cid,uid)
-          return render_template('edit_channel.html',channels=channels,uids=uids,checked_uids=checked_uids)
+          return render_template('edit-channel.html',channels=channels,uids=uids,checked_uids=checked_uids)
 
      
      if request.method=="POST":
