@@ -1,0 +1,157 @@
+/* 全体のスタイル */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000000; /* 黒背景（アプリ外側） */
+  }
+  
+  .app-container {
+    width: 412px; /* 横幅固定 */
+    height: 917px; /* 縦幅固定 */
+    background-color: #FFEAF4; /* 携帯画面部分の背景色 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 80px; /* 全体を下に移動 */
+    position: relative; /* キラキラを制限するための親要素 */
+    overflow: hidden; /* 画面外に出る要素を隠す */
+  }
+  
+  /* ロゴ部分 */
+  .logo-container {
+    position: relative;
+    margin-bottom: 30px; /* ロゴとフォーム間の距離 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* 円の設定 */
+  .circle {
+    width: 160px; /* 円の横幅 */
+    height: 160px; /* 円の縦幅 */
+    background-color: #FFF7EF; /* 円の背景色 */
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 以下で位置調整が可能 */
+    margin-top: 60px; /* 円の上下位置調整 */
+    margin-left: 0px;  /* 円の左右位置調整 */
+  }
+  
+  h1 {
+    font-family: 'Potta One', cursive; /* Potta Oneフォント */
+    font-size: 2.8em; /* 文字サイズ調整 */
+    color: #FFEAF4;
+    text-shadow: -2px -2px 0 #BF7FFF, 2px -2px 0 #BF7FFF, -2px 2px 0 #BF7FFF, 2px 2px 0 #BF7FFF;
+    position: absolute; /* 円の中心に配置 */
+    top: 50%; /* 縦方向の中心 */
+    left: 50%; /* 横方向の中心 */
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  /* フォーム背景の四角 */
+  .form-wrapper {
+    background-color: #FFF7EF;
+    border: 2px solid #BF7FFF;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px; /* 四角の横幅 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* 入力欄とボタン間の全体的な間隔 */
+    margin-top: 50px; /* ロゴとの余白 */
+  }
+  
+  /* 入力欄 */
+  input {
+    width: 100%; /* 入力欄の横幅 */
+    height: 40px; /* 入力欄の高さ */
+    padding: 5px;
+    border: 2px solid #BF7FFF;
+    border-radius: 5px;
+    background-color: #FFF7EF;
+  }
+  
+  /* ラベル */
+  label {
+    width: 100%;
+    text-align: left;
+    font-size: 1em;
+    margin-bottom: 5px;
+  }
+  
+  /* ボタンスタイル */
+  button {
+    width: 100%;
+    height: 40px;
+    background-color: #CCFFFF;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 20px; /* ボタンとパスワード入力フォーム間の個別の余白 */
+  }
+  
+  button:hover {
+    background-color: #B2E5E5;
+  }
+  
+  /* キラキラの追加 */
+  .sparkle-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* マウスイベントを無効化 */
+  }
+  
+  .sparkle {
+    position: absolute;
+    width: 25px; /* キラキラの幅 */
+    height: 25px; /* キラキラの高さ */
+    background-image: url('/static/img/kirakira.png'); /* キラキラ画像 */
+    background-size: cover;
+    opacity: 0;
+    animation: sparkle-animation 3s infinite ease-in-out;
+  }
+  
+  /* キラキラ位置調整 */
+  .sparkle1 {
+    top: 200px;
+    left: 300px;
+  }
+  
+  .sparkle2 {
+    top: 300px;
+    right: 150px;
+  }
+  
+  .sparkle3 {
+    top: 130px;
+    left: 80px;
+  }
+  
+  /* キラキラのアニメーション */
+  @keyframes sparkle-animation {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0.8) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2) rotate(45deg);
+    }
+  }
+  

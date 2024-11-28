@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>チャット画面</title>
+  <link rel="stylesheet" href="/static/css/detail.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- ヘッダー -->
+    <header class="header">
+      <button class="button" onclick="location.href='/'">チャンネル一覧</button>
+      <button class="button" onclick="location.href='/album/{{cid}}'">アルバム</button>
+    </header>
+
+    <!-- チャットエリア -->
+    <main class="chat-container">
+      {% if messages %}
+        {% for message in messages %}
+        <div class="message {{ 'user' if message.sender == 'user' else 'other' }}">
+          <!-- メッセージ送信者の名前 -->
+          <div class="message-sender">{{ message.user_name }}</div>
+          <div class="message-content">{{ message.message }}</div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-messages">メッセージがありません。</p>
+      {% endif %}
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+      <form method="POST" action="/message">
+        <input 
+          type="text" 
+          name="message" 
+          class="input-box" 
+          placeholder="コメントを入力してください。" 
+          required
+        />
+        <input type="hidden" name="cid" value="{{ cid }}" />
+        <button type="submit" class="send-button">➤</button>
+      </form>
+    </footer>
+  </div>
+</body>
+</html>
