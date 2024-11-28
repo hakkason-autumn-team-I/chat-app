@@ -49,7 +49,7 @@
           {% for user in uids %}
           <div>
             {{ user.user_name }}
-            <input class="checkbox" type="checkbox" value="uids">
+            <input class="checkbox" name="uids" type="checkbox" value="{{ user.id }}">
           </div>
           {% endfor %}
         </div>
