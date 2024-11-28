@@ -6,7 +6,6 @@ import datetime
 import re
 import hashlib
 import os
-import test
 
 app = Flask(__name__)
 #セッション情報の暗号化にsecret_keyが必要で、今回はuuidを16進数化することを利用して、ランダムなstrかbytes列を作る。
