@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
+    <title>update_signup</title>
+  </head>
+
+<body>
+<header class="back">
+  <button>
+    <a href="/">戻る</a>
+  </button>
+</header>
+
+  <main class="container">
+    <form action="/update-profile" method="post" >
+      <div>
+        <label>ニックネーム</label>
+        <input type="text" name="user_name" value="{{uids.user_name}}"/>
+      </div>
+
+      <div>
+        <label>メールアドレス</label>
+        <input type="email" name="email" value="{{uids.email}}"/>
+      </div>
+
+      <div>
+        <label>パスワード</label>
+        <input type="password" name="password1" value="{{uids.password1}}"/>
+      </div>
+
+      <div>
+        <label>確認用パスワード</label>
+        <input type="password" name="password2"/>
+      </div>
+
+      <div>
+        <button type="submit">編集</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
