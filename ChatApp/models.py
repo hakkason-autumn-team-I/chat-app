@@ -62,14 +62,18 @@ class dbconnect:
             cur.close()
 
     #チャンネルメンバー追加
-    def add_channelmembers(uid_list,cid):
+    def add_channelmembers(uids,uid,cid):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            for uid in uid_list:
+            for ouid in uids:
                 sql = "INSERT INTO channelmembers (uid,cid,starred) VALUES (%s,%s,False);"
-                cur.execute(sql,(uid,cid))
+                cur.execute(sql,(ouid,cid))
             conn.commit()
+            sql = "INSERT INTO channelmembers (uid,cid,starred) VALUES (%s,%s,False);"
+            print(uid)
+            cur.execute(sql,(uid,cid))
+            conn.commit()        
         except Exception as e:
             print(f'エラーが発生:{e}')
             abort(500)
