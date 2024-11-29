@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>アルバム画面</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/album.css') }}">
+</head>
+<body>
+  <div class="app-container">
+    <!-- ヘッダー -->
+    <header class="header">
+      <!-- 戻るボタン -->
+      <button class="button back-button" onclick="location.href='/detail/{{cid}}'">戻る</button>
+
+      <!-- 画像追加ボタン -->
+      <button class="button add-image-button" onclick="location.href='/create-image/<cid>'">画像追加</button>
+    </header>
+
+    <!-- アルバムコンテンツ -->
+    <main class="album-container">
+      {% if albums %}
+        {% for album in albums %}
+        <div class="image-card">
+          <img
+            src="{{ album.album_place }}"
+            alt="アルバム画像"
+          >
+        </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-images">画像がまだ追加されていません。</p>
+      {% endif %}
+    </main>
+
+  </div>
+</body>
+</html>

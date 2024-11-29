@@ -1,0 +1,132 @@
+/* 全体のベーススタイル */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000000; /* 外側の背景色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 412px; /* モバイル画面の最大幅 */
+    height: 100%;
+    max-height: 812px; /* モバイル画面の最大高さ */
+    background-color: #FFEAF4; /* メイン画面の背景色 */
+    border-radius: 10px; /* 角を丸く */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* 少し浮き上がるような影 */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 内部のはみ出しを隠す */
+}
+
+/* ヘッダー */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #FFEAF4; /* ヘッダー部分の背景 */
+    border-bottom: 1px solid #BF7FFF; /* 下に細い線を追加 */
+}
+
+.button {
+    background-color: #CCFFFF; /* ボタンの背景色 */
+    border: 2px solid #BF7FFF; /* ボタンの枠線 */
+    border-radius: 10px; /* ボタンを丸くする */
+    padding: 8px 16px; /* ボタン内の余白 */
+    font-size: 1em; /* ボタンのフォントサイズ */
+    cursor: pointer; /* カーソルをポインターに */
+    transition: background-color 0.3s ease; /* 色変化をスムーズに */
+}
+
+.button:hover {
+    background-color: #B2E5E5; /* ホバー時の色 */
+}
+
+/* チャットエリア */
+.chat-container {
+    flex: 1; /* チャットエリアが残りのスペースを占有 */
+    padding: 10px;
+    overflow-y: auto; /* 縦スクロールを有効化 */
+    background-color: #FFF7EF; /* チャットエリアの背景 */
+}
+
+.message {
+    margin: 10px 0; /* メッセージ間のスペース */
+    display: flex;
+    flex-direction: column; /* 縦方向に要素を並べる */
+    align-items: flex-start; /* 左寄せ */
+}
+
+.message.user {
+    align-items: flex-start; /* 自分のメッセージは左寄せ */
+}
+
+.message.other {
+    align-items: flex-end; /* 他人のメッセージは右寄せ */
+}
+
+/* メッセージ送信者の名前 */
+.message-sender {
+    font-size: 0.9em; /* 少し小さめの文字 */
+    font-weight: bold; /* 太字で強調 */
+    margin-bottom: 5px; /* メッセージとの間にスペースを作る */
+    color: #555555; /* 少し薄い文字色 */
+    text-align: left; /* 左寄せ */
+}
+
+/* メッセージコンテンツ */
+.message-content {
+    max-width: 70%; /* メッセージの幅制限 */
+    padding: 10px; /* メッセージ内の余白 */
+    background-color: #FFEAF4; /* メッセージ背景 */
+    border: 2px solid #BF7FFF; /* 枠線 */
+    border-radius: 10px; /* メッセージボックスを丸く */
+    font-size: 1em;
+    word-wrap: break-word; /* 長い単語を折り返し */
+}
+
+.no-messages {
+    text-align: center;
+    color: #888888;
+    font-size: 1em;
+}
+
+/* フッター */
+.footer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #FFEAF4; /* フッターの背景 */
+    border-top: 1px solid #BF7FFF; /* フッター上部に線を追加 */
+}
+
+.input-box {
+    flex: 1;
+    margin-right: 10px; /* 送信ボタンとのスペース */
+    padding: 15px; /* 内側の余白を大きくする */
+    border: 2px solid #BF7FFF; /* 入力欄の枠線 */
+    border-radius: 10px; /* 入力欄を丸く */
+    background-color: #FFF7EF; /* 入力欄の背景色 */
+    font-size: 1.2em; /* 文字サイズを大きくする */
+    height: 50px; /* 高さを調整 */
+    box-sizing: border-box; /* 枠線やパディングを含めてサイズを調整 */
+}
+
+.send-button {
+    background-color: #CCFFFF; /* ボタン背景色 */
+    border: 2px solid #BF7FFF; /* ボタンの枠線 */
+    border-radius: 10px; /* ボタンを丸く */
+    padding: 10px 16px;
+    cursor: pointer; /* カーソルをポインターに */
+    font-size: 1.2em; /* ボタン内の文字サイズ */
+    transition: background-color 0.3s ease; /* 色変化をスムーズに */
+}
+
+.send-button:hover {
+    background-color: #B2E5E5; /* ホバー時の色 */
+}
