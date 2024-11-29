@@ -38,3 +38,46 @@
   </div>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=412, initial-scale=1.0">
+  <title>ログイン画面</title>
+  <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/registration.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="sparkle-container">
+      <div class="sparkle sparkle1"></div>
+      <div class="sparkle sparkle2"></div>
+      <div class="sparkle sparkle3"></div>
+    </div>
+    <div class="login-container">
+      <div class="login-box">
+        <div class="logo-container">
+          <div class="circle"></div>
+          <h1><span>Sparkle</span><br><span>Meet</span></h1>
+        </div>
+        <div class="form-wrapper">
+          <form action="/login" method="post">
+            <div class="form-group">
+              <label for="email">メールアドレス</label>
+              <input type="email" id="email" name="email" required placeholder="メールアドレスを入力">
+            </div>
+            <div class="form-group">
+              <label for="password">パスワード</label>
+              <input type="password" id="password" name="password" required placeholder="パスワードを入力">
+            </div>
+            <button type="submit">サインイン</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

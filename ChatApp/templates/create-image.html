@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="../static/css/create-image.css">
+    <title>create-image</title>
+  </head>
+
+<body>
+  <header class="back">
+    <button>
+      <a href="/">戻る</a>
+    </button>
+  </header>
+
+  <main class="container">
+    <form action="/create-image" method="post" >
+      <div>
+        <label>画像</label>
+        <!--画像イメージを追加したい-->
+        <input type="file" name="image">
+      </div>
+      <div>
+        <label>画像タイトル</label>
+        <input type="text" name="album_title">
+      </div>
+
+      <div>
+        <label>説明</label>
+        <input type="textarea" name="album_discription">
+      </div>
+
+      <div>
+        <input type="submit" value="画像追加"/>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

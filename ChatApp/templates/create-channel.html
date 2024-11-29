@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="../static/css/channel.css">
+    <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
+    <title>create-channel</title>
+  </head>
+
+<body>
+  <header>
+    <div class="back">
+      <button>
+        <a href="/">戻る</a>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <form  action="/create-channel" method="post" enctype="multipart/form-data">
+        <div>
+          <label>チャンネル名</label>
+          <input type="text" name="channel_Name"/>
+        </div>
+    
+        <div>
+          <label>URL</label>
+          <input type="url" name="url"/>
+        </div>
+    
+        <div>
+          <label>日時</label>
+          <input type="date" name="event_date"/>
+        </div>
+    
+        <div>
+          <label>画像</label>
+          <!-- 出来れば画像イメージを追加したい -->
+          <input type="file" name="image_place"/>
+        </div>
+    
+      
+        <label>共有相手</label>
+      <!--すでにチャックがついている人にcheckdをつける -->
+        
+        <div class="scroll">
+          {% for user in uids %}
+          <div>
+            {{ user.user_name }}
+            <input class="checkbox" name="uids" type="checkbox" value="{{ user.id }}">
+          </div>
+          {% endfor %}
+        </div>
+        
+        <div>
+          <button type="submit">作成</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>
